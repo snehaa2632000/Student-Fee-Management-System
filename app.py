@@ -6,28 +6,7 @@ import mysql.connector
 import json
 
 app = Flask(__name__)
-'''
-mysql = MySQL()
-app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'password'
-app.config['MYSQL_DATABASE_DB'] = 'cc'
-app.config['MYSQL_DATABASE_HOST'] = 'db'
 
-mysql.init_app(app)
-con = mysql.connect()
-with open("init.sql", 'r') as file1:
-    sql_cmds = file1.read()
-
-sql_cmds1 = sql_cmds.split(";")
-
-for i in range(0, len(sql_cmds1)-1):
-    query = sql_cmds1[i] + ';'
-    cursor = con.cursor()
-    cursor.execute(query)
-con.commit()
-cursor.close()
-
-'''
 config = {
     'user': 'root',
     'password': 'password',
@@ -51,16 +30,6 @@ con.commit()
 
 @app.route("/",methods=['GET'])
 def index():
-    '''
-    config = {
-    'user':'root',
-    'password':'root',
-    'host':'db',
-    'database':'cc',
-    'port' : '3306'
-    }
-    con = mysql.connector.connect(**config)
-    '''
     cursor = con.cursor()
     cursor.execute('SELECT * FROM sessions')
     sessions = cursor.fetchall()
@@ -71,16 +40,6 @@ def index():
 
 @app.route("/insert",methods=['GET'])
 def insert():
-    '''
-    config = {
-    'user':'root',
-    'password':'root',
-    'host':'db',
-    'database':'cc',
-    'port' : '3306'
-    }
-    con = mysql.connector.connect(**config)
-    '''
     cursor = con.cursor()
     cursor.execute("SELECT * FROM sessions")
     sessions = cursor.fetchall()
@@ -90,17 +49,6 @@ def insert():
 
 @app.route("/view", methods=['POST', 'GET'])
 def view():
-    #cursor = mysql.connection.cursor()
-    '''
-    config = {
-    'user':'root',
-    'password':'root',
-    'host':'db',
-    'database':'cc',
-    'port' : '3306'
-    }
-    con = mysql.connector.connect(**config)
-    '''
     cursor = con.cursor()
     if request.method == "POST":
         #name = request.form.get("name")
@@ -137,16 +85,6 @@ def view():
 
 @app.route("/all_session", methods=['POST', 'GET'])
 def all_session():
-    '''
-    config = {
-    'user':'root',
-    'password':'root',
-    'host':'db',
-    'database':'cc',
-    'port' : '3306'
-    }
-    con = mysql.connector.connect(**config)
-    '''
     cursor = con.cursor()
     if request.method == "POST":
         session = request.form.get("session")
@@ -168,16 +106,6 @@ def all_session():
 
 @app.route("/search", methods=['POST','GET'])
 def search():
-    '''
-    config = {
-    'user':'root',
-    'password':'root',
-    'host':'db',
-    'database':'cc',
-    'port' : '3306'
-    }
-    con = mysql.connector.connect(**config)
-    '''
     cursor = con.cursor()    
 
     if request.method == "POST":       
@@ -193,16 +121,6 @@ def search():
 
 @app.route("/update/<roll_no>/", methods=['POST','GET'])
 def update(roll_no):
-    '''
-    config = {
-    'user':'root',
-    'password':'root',
-    'host':'db',
-    'database':'cc',
-    'port' : '3306'
-    }
-    con = mysql.connector.connect(**config)
-    '''
     cursor = con.cursor()
 
     if request.method=="POST":
@@ -233,16 +151,6 @@ def update(roll_no):
 
 @app.route("/delete/<roll_no>/")
 def delete(roll_no):
-    '''
-    config = {
-    'user':'root',
-    'password':'root',
-    'host':'db',
-    'database':'cc',
-    'port' : '3306'
-    }
-    con = mysql.connector.connect(**config)
-    '''
     cursor = con.cursor()
     cursor.execute("SELECT * FROM students WHERE roll_no = %s", (roll_no,))
     stud = cursor.fetchone()
