@@ -1,0 +1,12 @@
+click==8.0.4
+Flask==2.0.3
+greenlet==1.1.2
+itsdangerous==2.1.0
+Jinja2==3.0.3
+MarkupSafe==2.1.0
+mysql-connector-python==8.0.28
+protobuf==3.19.4
+PyMySQL==1.0.2
+SQLAlchemy==1.4.31
+Werkzeug==2.0.3
+Flask-MySQL==1.5.2

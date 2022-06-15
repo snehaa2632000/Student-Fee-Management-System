@@ -1,0 +1,25 @@
+version: "3.8"
+services:
+  db:
+    container_name: database-ca1
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: cc
+    healthcheck:
+      test: "mysqladmin -u root -p$$MYSQL_ROOT_PASSWORD ping --protocol=tcp"
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 5s
+
+  web:
+    build: .
+    image: snehaas2000/flaskapp-ca1
+    ports:
+      - "5000:5000"
+    depends_on:
+      db:
+        condition: service_healthy
