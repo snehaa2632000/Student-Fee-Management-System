@@ -17,7 +17,7 @@ services:
 
   web:
     build: .
-    image: snehaas2000/flaskapp-ca1
+    image: <replace with docker image name>
     ports:
       - "5000:5000"
     depends_on:
